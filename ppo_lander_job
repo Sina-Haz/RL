@@ -1,0 +1,16 @@
+#!/bin/bash -l
+#SBATCH --output=logfile
+#SBATCH --job-name=ppo_training
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=16G
+#SBATCH --time=2:00:00
+
+source ~/.bashrc
+
+# Explicitly source the conda.sh script to ensure Conda is properly initialized
+source /common/home/skh79/miniconda3/etc/profile.d/conda.sh
+
+cd ~/Documents/RL/
+
+conda activate pkgenv
+python lander_train.py --timesteps 3000000 --save_path "models/ppo-Lander-3m"
